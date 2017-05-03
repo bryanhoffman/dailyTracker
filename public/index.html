@@ -6,15 +6,68 @@
         <meta name="viewport">
         <title>Daily Tracker</title>
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
         <script src="core.js"></script>
+
+        <!--custom css -->
+        <!-- I'm dumb and can't figure out how to load style.css so here it is -->
+        <style>
+           .entry {
+             width: 100%;
+			 height: auto;
+  			 text-align: center;
+  			 border-radius: 10px;
+		}
+
+		.entry i {
+  			margin-top: 50px;
+  			margin-bottom: 50px;
+  			color: #222222;
+		}
+
+		.task {
+		  padding: 15px;
+		  position: relative;
+		}
+ 
+        </style>
     </head>
 
     <body ng-controller="mainController">
         <div class="container">
             <div class="jumbotron text-center">
                 <h1>Daily Tracker</h1>
+            </div>
+
+            <!-- tasks -->
+			<div id="tasks" class="row">
+                <div class="task col-md-4">
+                    <div class="entry" style="background: #AABBAA;">
+                        <h1><i class="fa fa-tint fa-5x"></i></h1>
+                    </div>
+                </div>
+                <div class="task col-md-4">
+                    <div class="entry" style="background: #FF8888;">
+                        <h1><i class="fa fa-cutlery fa-5x"></i></h1>
+                    </div>
+                </div>
+                <div class="task col-md-4">
+                    <div class="entry" style="background: #8888DD;">
+                        <h1><i class="fa fa-cloud fa-5x"></i></h1>
+                    </div>
+                </div>
+                <div class="task col-md-4 col-md-offset-2">
+                    <div class="entry" style="background: #FFAAFF;">
+                        <h1><i class="fa fa-file-text-o fa-5x"></i></h1>
+                    </div>
+                </div>
+                <div class="task col-md-4">
+                    <div class="entry" style="background: #66FF66;">
+                        <h1><i class="fa fa-heartbeat fa-5x"></i></h1>
+                    </div>
+                </div>
             </div>
 
             <!-- create hydration instance -->
@@ -39,7 +92,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
    </body>
 </html>
