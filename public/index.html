@@ -1,97 +1,212 @@
 <!doctype html>
 
 <html ng-app="Hydrate">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport">
-        <title>Daily Tracker</title>
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
-        <script src="core.js"></script>
 
-        <!--custom css -->
-        <!-- I'm dumb and can't figure out how to load style.css so here it is -->
-        <style>
-           .entry {
-             width: 100%;
-			 height: auto;
-  			 text-align: center;
-  			 border-radius: 10px;
-		}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport">
+  <title>Daily Tracker</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <!-- load jquery -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+  <!-- load angular -->
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="core.js"></script>
 
-		.entry i {
-  			margin-top: 50px;
-  			margin-bottom: 50px;
-  			color: #222222;
-		}
+  <!--custom css -->
+  <!-- I'm dumb and can't figure out how to load style.css so here it is -->
+  <style>
+    .entry {
+      width: 100%;
+      height: auto;
+      text-align: center;
+      border-radius: 10px;
+    }
+    
+    .entry i {
+      margin-top: 50px;
+      margin-bottom: 50px;
+      color: #222222;
+    }
+    
+    .task {
+      padding: 15px;
+      position: relative;
+    }
+  </style>
+</head>
 
-		.task {
-		  padding: 15px;
-		  position: relative;
-		}
- 
-        </style>
-    </head>
+<body ng-controller="mainController">
+  <div class="container">
+    <div class="jumbotron text-center">
+      <h1>Daily Tracker</h1>
+    </div>
 
-    <body ng-controller="mainController">
-        <div class="container">
-            <div class="jumbotron text-center">
-                <h1>Daily Tracker</h1>
-            </div>
+    <!-- tasks -->
+    <div id="tasks" class="row">
+      <div class="task col-md-4">
+        <div class="entry" style="background: #AABBAA;">
+          <a href="#" data-toggle="modal" data-target="#hydrationModal"><h1><i class="fa fa-tint fa-5x"></i></h1></a>
+        </div>
+      </div>
+      <div class="task col-md-4">
+        <div class="entry" style="background: #FF8888;">
+          <a href="#" data-toggle="modal" data-target="#foodModal"><h1><i class="fa fa-cutlery fa-5x"></i></h1></a>
+        </div>
+      </div>
+      <div class="task col-md-4">
+        <div class="entry" style="background: #8888DD;">
+          <h1><i class="fa fa-cloud fa-5x"></i></h1>
+        </div>
+      </div>
+      <div class="task col-md-4 col-md-offset-2">
+        <div class="entry" style="background: #FFAAFF;">
+          <a href="#" data-toggle="modal" data-target="#journalModal"><h1><i class="fa fa-file-text-o fa-5x"></i></h1></a>
+        </div>
+      </div>
+      <div class="task col-md-4">
+        <div class="entry" style="background: #66FF66;">
+          <a href="#" data-toggle="modal" data-target="#runModal"><h1><i class="fa fa-heartbeat fa-5x"></i></h1></a>
+        </div>
+      </div>
+    </div>
 
-            <!-- tasks -->
-			<div id="tasks" class="row">
-                <div class="task col-md-4">
-                    <div class="entry" style="background: #AABBAA;">
-                        <h1><i class="fa fa-tint fa-5x"></i></h1>
-                    </div>
-                </div>
-                <div class="task col-md-4">
-                    <div class="entry" style="background: #FF8888;">
-                        <h1><i class="fa fa-cutlery fa-5x"></i></h1>
-                    </div>
-                </div>
-                <div class="task col-md-4">
-                    <div class="entry" style="background: #8888DD;">
-                        <h1><i class="fa fa-cloud fa-5x"></i></h1>
-                    </div>
-                </div>
-                <div class="task col-md-4 col-md-offset-2">
-                    <div class="entry" style="background: #FFAAFF;">
-                        <h1><i class="fa fa-file-text-o fa-5x"></i></h1>
-                    </div>
-                </div>
-                <div class="task col-md-4">
-                    <div class="entry" style="background: #66FF66;">
-                        <h1><i class="fa fa-heartbeat fa-5x"></i></h1>
-                    </div>
-                </div>
-            </div>
+    <!-- create hydration instance -->
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2 text-center">
+        <form>
+          <div class="form-group">
+            <input type="text" class="form-control input-lg" placeholder="water" ng-model="formData.type">
+            <button type="submit" class="btn btn-primary btn-lg" ng-click="createHydrate()">Add Drink</button>
+          </div>
+        </form>
+      </div>
+    </div>
 
-            <!-- create hydration instance -->
-            <div class="row">
-                <div clss="col-sm-8 col-sm-offset-2 text-center">
-                    <form>
-                        <div class="form-group">
-                            <input type="text" class="form-control input-lg" placeholder="water" ng-model="formData.type">
-                            <button type="submit" class="btn btn-primary btn-lg" ng-click="createHydrate()">Add Drink</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- list hydration -->
-            <div class="row">
-                <div class="col-sm-4 col-sm-offset-4">
-                    <div class="drink" ng-repeat="drink in hydrate">
-                        <label>
+    <!-- list hydration -->
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-4">
+        <div class="drink" ng-repeat="drink in hydrate">
+          <label>
                             <p>{{ drink.type }} at {{ drink.time }}</p>
                         </label>
-                    </div>
-                </div>
-            </div>
         </div>
-   </body>
+      </div>
+    </div>
+    <!-- Hydration Modal -->
+    <div id="hydrationModal" class="modal fade" role="dialog" tab-index="-1">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Add Hydration</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-inline">
+              <label class="mr-sm-2" for="inlineFormCustomSelect">I drank</label>
+              <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+   		 <option selected>Choose...</option>
+		 <option value="1">Water</option>
+		 <option value="2">Coffee</option>
+ 		 <option value="3">Tea</option>
+	         <option value="4">Soda</option>
+	      </select>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Food Modal -->
+    <div id="foodModal" class="modal fade" role="dialog" tab-index="-1">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Add Food</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-inline">
+              <div class="form-group">
+                <label for="exampleTextarea">I ate</label>
+                <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Journal Modal -->
+    <div id="journalModal" class="modal fade" role="dialog" tab-index="-1">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Add Journal Entry</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-inline">
+              <div class="form-group">
+                <textarea class="form-control" id="exampleTextarea" rows="10"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Run Modal -->
+    <div id="runModal" class="modal fade" role="dialog" tab-index="-1">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Add Run</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-inline">
+              <label class="mr-sm-2" for="inlineFormCustomSelect">Log number of miles ran:</label>
+              <div class="form-group">
+                <textarea class="form-control" id="exampleTextarea" rows="1"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+
+  </div>
+</body>
+
 </html>
