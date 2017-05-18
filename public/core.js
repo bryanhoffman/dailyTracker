@@ -15,11 +15,35 @@ function mainController($scope, $http) {
             console.log('Error: '+data);
         });
 
+    $http.get('/api/exercise')
+        .success(function(data) {
+            $scope.exercise = data;
+            console.log(data);
+        })
+        .error(function(data) {
+            console.log('Error: '+data);
+        });
+
+	//I suspect  these types of things are also handled in file structure somehow
+
     $scope.createHydrate = function() {
         $http.post('/api/hydrate', $scope.formData)
             .success(function(data) {
                 $scope.formData = {};
                 $scope.hydrate = data;
+                console.log(data);
+            })
+            .error(function(data) {
+                console.log('Error: '+data);
+            });
+    };
+
+
+    $scope.createExercise = function() {
+        $http.post('/api/exercise', $scope.formData)
+            .success(function(data) {
+                $scope.formData = {};
+                $scope.exercise = data;
                 console.log(data);
             })
             .error(function(data) {

@@ -22,6 +22,11 @@ var Hydrate = mongoose.model('Hydrate', {
     time: String
 });
 
+var Exercise = mongoose.model('Exercise', {
+    length: Number,
+    time: String
+});
+
 //start server
 app.listen(8080);
 console.log('Server is running on port 8080');
@@ -37,6 +42,18 @@ app.get('/api/hydrate', function(req, res) {
         res.json(hydrate); //return all drinks had
     });
 });
+
+// get exercise history
+//I'm assuming I need to figure out models or best practices here
+app.get('/api/exercise', function(req, res) {
+    Exercise.find(function(err, exercise){
+        if(err)
+            res.send(err)
+
+        res.json(exercise); //return exercise history
+    });
+});
+
 
 //create new hydration instance
 
@@ -55,6 +72,25 @@ app.post('/api/hydrate', function(req, res) {
         });
     });
 });
+
+//add exercise
+
+app.post('/api/exercise', function(req, res) {
+    Exercise.create({
+        length : req.body.length,
+        time : Date()
+    }, function(err, exercise) {
+        if (err)
+            res.send(err);
+
+        Hydrate.find(function(err, exercise) {
+            if (err)
+                res.send(err)
+            res.json(exercise);
+        });
+    });
+});
+
 
 
 //send client index.html file

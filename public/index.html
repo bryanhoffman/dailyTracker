@@ -93,6 +93,12 @@
                             <p>{{ drink.type }} at {{ drink.time }}</p>
                         </label>
         </div>
+        <div class="exercise" ng-repeat="run in exercise">
+          <label>
+              <p>Ran {{ run.length }} miles at {{ run.time }}</p>
+                        </label>
+        </div>
+
       </div>
     </div>
     <!-- Hydration Modal -->
@@ -108,14 +114,15 @@
           <div class="modal-body">
             <form class="form-inline">
               <label class="mr-sm-2" for="inlineFormCustomSelect">I drank</label>
-              <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+              <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect" ng-model="formData.type">
    		 <option selected>Choose...</option>
-		 <option value="1">Water</option>
-		 <option value="2">Coffee</option>
- 		 <option value="3">Tea</option>
-	         <option value="4">Soda</option>
+		 <option value="water">Water</option>
+		 <option value="coffee">Coffee</option>
+ 		 <option value="tea">Tea</option>
+	         <option value="soda">Soda</option>
+             
 	      </select>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" ng-click="createHydrate()" class="btn btn-primary">Submit</button>
             </form>
           </div>
           <div class="modal-footer">
@@ -190,9 +197,9 @@
             <form class="form-inline">
               <label class="mr-sm-2" for="inlineFormCustomSelect">Log number of miles ran:</label>
               <div class="form-group">
-                <textarea class="form-control" id="exampleTextarea" rows="1"></textarea>
+                <textarea class="form-control" id="exampleTextarea" rows="1" ng-model="formData.length"></textarea>
               </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary" ng-click="createExercise()" data-dismiss="modal">Submit</button>
             </form>
           </div>
           <div class="modal-footer">
