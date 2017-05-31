@@ -85,18 +85,21 @@
       </div>
     </div>
 
-    <!-- list hydration -->
+    <!-- list stuffs -->
     <div class="row">
       <div class="col-sm-4 col-sm-offset-4">
         <div class="drink" ng-repeat="drink in hydrate">
-          <label>
-                            <p>{{ drink.type }} at {{ drink.time }}</p>
-                        </label>
+			<div class="alert alert-warning alert-dismissible" role="alert">
+ 				<button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="deleteHydrate(drink._id)"><span aria-hidden="true">&times;</span></button>
+  				<p>{{ drink.type }} at {{ drink.time }}</p>
+			</div>
         </div>
         <div class="exercise" ng-repeat="run in exercise">
-          <label>
-              <p>Ran {{ run.length }} miles at {{ run.time }}</p>
-                        </label>
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="deleteExercise(run._id)"><span aria-hidden="true">&times;</span></button>
+                <p>{{ run.length }} at {{ run.time }}</p>
+            </div>
+
         </div>
 
       </div>

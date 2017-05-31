@@ -38,6 +38,16 @@ function mainController($scope, $http) {
             });
     };
 
+    $scope.deleteHydrate = function(id) {
+        $http.delete('/api/hydrate/'+id)
+            .success(function(data) {
+                $scope.hydrate = data;
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            })
+    };
+
 
     $scope.createExercise = function() {
         $http.post('/api/exercise', $scope.formData)
@@ -50,6 +60,16 @@ function mainController($scope, $http) {
                 console.log('Error: '+data);
             });
 
+   };
+
+   $scope.deleteExercise = function(id) {
+       $http.delete('/api/exercise/' + id)
+           .success(function(data) {
+               $scope.exercise = data;
+           })
+           .error(function(data) {
+               console.log('Error: '+data);
+           });
    };
 
 }
