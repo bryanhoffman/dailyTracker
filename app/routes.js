@@ -5,6 +5,9 @@
 
 var Hydrate = require('./models/hydrate');
 var Exercise = require('./models/exercise');
+var Food = require('./models/food');
+var Cig = require('./models/cig');
+var Journal = require('./models/journal');
 
 //expose routes with module.exports
 
@@ -99,6 +102,141 @@ module.exports = function(app) {
             });
         });
     });
+
+    //Food routes
+    // get all drinks had
+    app.get('/api/food', function(req, res) {
+        Food.find(function(err, food){
+            if(err)
+                res.send(err)
+
+            res.json(food); //return all drinks had
+        });
+    });
+
+    //create new food instance
+
+    app.post('/api/food', function(req, res) {
+        Food.create({
+            description : req.body.description,
+            time : Date()
+        }, function(err, food) {
+            if (err)
+                res.send(err);
+
+            Food.find(function(err, food) {
+                if (err)
+                    res.send(err)
+                res.json(food);
+            });
+        });
+    });
+
+    app.delete('/api/food/:food_id', function(req, res) {
+        Food.remove({
+            _id : req.params.food_id
+        }, function(err, food) {
+            if (err) 
+                res.send(err);
+        
+            Food.find(function(err, food) {
+                if(err)
+                    res.send(err)
+
+                res.json(food);
+            });
+        });
+    });
+
+    //Cig routes
+    // get all drinks had
+    app.get('/api/cig', function(req, res) {
+        Cig.find(function(err, cig){
+            if(err)
+                res.send(err)
+
+            res.json(cig); //return all drinks had
+        });
+    });
+
+    //create new cigarette instance
+
+    app.post('/api/cig', function(req, res) {
+        Cig.create({
+            time : Date()
+        }, function(err, cig) {
+            if (err)
+                res.send(err);
+
+            Cig.find(function(err, cig) {
+                if (err)
+                    res.send(err)
+                res.json(cig);
+            });
+        });
+    });
+
+    app.delete('/api/cig/:cig_id', function(req, res) {
+        Cig.remove({
+            _id : req.params.cig_id
+        }, function(err, cig) {
+            if (err) 
+                res.send(err);
+        
+            Cig.find(function(err, cig) {
+                if(err)
+                    res.send(err)
+
+                res.json(cig);
+            });
+        });
+    });
+
+    //Journal routes
+    // get all drinks had
+    app.get('/api/journal', function(req, res) {
+        Journal.find(function(err, journal){
+            if(err)
+                res.send(err)
+
+            res.json(journal); //return all drinks had
+        });
+    });
+
+    //create new journal entry
+
+    app.post('/api/journal', function(req, res) {
+        Journal.create({
+            time : Date()
+        }, function(err, journal) {
+            if (err)
+                res.send(err);
+
+            Journal.find(function(err, journal) {
+                if (err)
+                    res.send(err)
+                res.json(journal);
+            });
+        });
+    });
+
+    app.delete('/api/journal/:journal_id', function(req, res) {
+        Journal.remove({
+            _id : req.params.journal_id
+        }, function(err, journal) {
+            if (err) 
+                res.send(err);
+        
+            Journal.find(function(err, journal) {
+                if(err)
+                    res.send(err)
+
+                res.json(journal);
+            });
+        });
+    });
+
+
 
 
 
