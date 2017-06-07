@@ -68,14 +68,11 @@ angular.module('homeDisplay', [])
 	    //I suspect  these types of things are also handled in file structure somehow
 
         $scope.createCig = function() {
-            //check it's not empty
-            if (!$.isEmptyObject($scope.formData)) {
                 Cig.create($scope.formData)
                     .success(function(data) {
                         $scope.formData = {};
                         $scope.cig = data;
                     });
-            }
         };
 
         $scope.deleteCig = function(id) {
