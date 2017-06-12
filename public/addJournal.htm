@@ -7,9 +7,12 @@
       <div class="row" style="text-align:center; padding-top: 50px; padding-bottom: 50px;">
         <form class="form-inline">
           <div class="form-group">
-            <textarea class="form-control" id="exampleTextarea" rows="10" ng-model="formData.entry"></textarea>
+            Entry: <textarea class="form-control" id="exampleTextarea" rows="10" ng-model="formData.entry"></textarea>
           </div><p>
-          <p><button type="submit" class="btn btn-primary" ng-click="createHydrate()">Submit</button>&nbsp;<a href="/"><button class="btn btn-default" >Cancel</button></a>
+          <div class="form-group">
+            Mood: <textarea class="form-control" id="exampleTextarea" rows="2" ng-model="formData.mood"></textarea>
+          </div><p>
+          <p><button type="submit" class="btn btn-primary" ng-click="createJournal()">Submit</button>&nbsp;<a href="/"><button class="btn btn-default" >Cancel</button></a>
         </form>
       </div>
     </div>

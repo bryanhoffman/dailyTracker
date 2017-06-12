@@ -2,7 +2,7 @@
 
 angular.module('homeDisplay', [])
 
-    .controller('mainController', function($scope, $http, Hydrate, Exercise, Cig, Food, Journal) {
+    .controller('mainController', function($scope, $http, $location, Hydrate, Exercise, Cig, Food, Journal, Meditation, Focus, Urination, Poop, Medical, Sleep) {
         $scope.formData = {};
         $scope.date = new Date();
 
@@ -22,6 +22,7 @@ angular.module('homeDisplay', [])
                     .success(function(data) {
                         $scope.formData = {};
                         $scope.hydrate = data;
+                        $location.path('/');
                     });
             }
         };
@@ -33,24 +34,30 @@ angular.module('homeDisplay', [])
                 });
         };
 
+        // Exercise
         Exercise.get()
            .success(function(data) {
                 $scope.exercise = data;
             });
 
 
-	    //I suspect  these types of things are also handled in file structure somehow
 
-        $scope.createExercise = function() {
-            //check it's not empty
-            if (!$.isEmptyObject($scope.formData)) {
-                Exercise.create($scope.formData)
+        $scope.startExercise = function() {
+                Exercise.start($scope.formData)
+                    .success(function(data) {
+                        //$scope.formData = {};
+                        $scope.exercise = data;
+                    });
+        };
+
+        $scope.stopExercise = function(id) {
+                Exercise.stop(id, $scope.formData)
                     .success(function(data) {
                         $scope.formData = {};
                         $scope.exercise = data;
                     });
-            }
         };
+
 
         $scope.deleteExercise = function(id) {
             Exercise.delete(id)
@@ -59,19 +66,21 @@ angular.module('homeDisplay', [])
                 });
         };
 
+
+
          Cig.get()
            .success(function(data) {
                 $scope.cig = data;
             });
 
 
-	    //I suspect  these types of things are also handled in file structure somehow
 
         $scope.createCig = function() {
                 Cig.create($scope.formData)
                     .success(function(data) {
                         $scope.formData = {};
                         $scope.cig = data;
+                        $location.path('/');
                     });
         };
 
@@ -91,7 +100,6 @@ angular.module('homeDisplay', [])
             });
 
 
-	    //I suspect  these types of things are also handled in file structure somehow
 
         $scope.createFood = function() {
             //check it's not empty
@@ -100,6 +108,7 @@ angular.module('homeDisplay', [])
                     .success(function(data) {
                         $scope.formData = {};
                         $scope.food = data;
+                        $location.path('/');
                     });
             }
         };
@@ -120,7 +129,6 @@ angular.module('homeDisplay', [])
             });
 
 
-	    //I suspect  these types of things are also handled in file structure somehow
 
         $scope.createJournal = function() {
             //check it's not empty
@@ -129,6 +137,7 @@ angular.module('homeDisplay', [])
                     .success(function(data) {
                         $scope.formData = {};
                         $scope.journal = data;
+                        $location.path('/');
                     });
             }
         };
@@ -140,6 +149,170 @@ angular.module('homeDisplay', [])
                 });
         };
 
+        // Meditation
+        Meditation.get()
+           .success(function(data) {
+                $scope.meditation = data;
+            });
 
+
+
+        $scope.startMeditation = function() {
+                Meditation.start($scope.formData)
+                    .success(function(data) {
+                        //$scope.formData = {};
+                        $scope.meditation = data;
+						//$location.path('/');
+                    });
+        };
+
+        $scope.stopMeditation = function(id) {
+                Meditation.stop(id, $scope.formData)
+                    .success(function(data) {
+                        $scope.formData = {};
+                        $scope.meditation = data;
+                        $location.path('/');
+                    });
+        };
+
+
+        $scope.deleteMeditation = function(id) {
+            Meditation.delete(id)
+                .success(function(data) {
+                    $scope.meditation = data;
+                });
+        };
+
+        // Focus
+        Focus.get()
+           .success(function(data) {
+                $scope.myFocus = data;
+            });
+
+
+
+        $scope.startFocus = function() {
+                Focus.start($scope.formData)
+                    .success(function(data) {
+                        //$scope.formData = {};
+                        $scope.myFocus = data;
+                    });
+        };
+
+        $scope.stopFocus = function(id) {
+                Focus.stop(id, $scope.formData)
+                    .success(function(data) {
+                        $scope.formData = {};
+                        $scope.myFocus = data;
+                        $location.path('/');
+                    });
+        };
+
+
+        $scope.deleteFocus = function(id) {
+            Focus.delete(id)
+                .success(function(data) {
+                    $scope.myFocus = data;
+                });
+        };
+	//Urination
+        Urination.get()
+           .success(function(data) {
+                $scope.urination = data;
+            });
+
+        $scope.createUrination = function() {
+                Urination.create($scope.formData)
+                    .success(function(data) {
+                        $scope.formData = {};
+                        $scope.urination = data;
+                        $location.path('/');
+            })
+        };
+
+        $scope.deleteUrination = function(id) {
+            Urination.delete(id)
+                .success(function(data) {
+                    $scope.urination = data;
+                });
+        };
+	//Poop
+        Poop.get()
+           .success(function(data) {
+                $scope.poop = data;
+            });
+
+
+
+        $scope.createPoop = function() {
+                Poop.create($scope.formData)
+                    .success(function(data) {
+                        $scope.formData = {};
+                        $scope.poop = data;
+                        $location.path('/');
+            })
+        };
+
+        $scope.deletePoop = function(id) {
+            Poop.delete(id)
+                .success(function(data) {
+                    $scope.poop = data;
+                });
+        };
+	//Medical Journal
+        Medical.get()
+           .success(function(data) {
+                $scope.medical = data;
+            });
+
+
+
+        $scope.createMedical = function() {
+                Medical.create($scope.formData)
+                    .success(function(data) {
+                        $scope.formData = {};
+                        $scope.medical = data;
+                        $location.path('/');
+            });
+        };
+
+        $scope.deleteMedical = function(id) {
+            Medical.delete(id)
+                .success(function(data) {
+                    $scope.medical = data;
+                });
+        };
+	
+        // Sleep
+        Sleep.get()
+           .success(function(data) {
+                $scope.sleep = data;
+            });
+
+
+
+        $scope.startSleep = function() {
+                Sleep.start($scope.formData)
+                    .success(function(data) {
+                        //$scope.formData = {};
+                        $scope.sleep = data;
+                    });
+        };
+
+        $scope.stopSleep = function(id) {
+                Sleep.stop(id, $scope.formData)
+                    .success(function(data) {
+                        $scope.formData = {};
+                        $scope.sleep = data;
+                    });
+        };
+
+
+        $scope.deleteSleep = function(id) {
+            Sleep.delete(id)
+                .success(function(data) {
+                    $scope.sleep = data;
+                });
+        };
 
 })

@@ -3,8 +3,11 @@
 var mongoose = require('mongoose');
 
 module.exports = mongoose.model('Exercise', {
-    length: Number,
-    time: String
+    startTime: String,
+	active: Boolean,
+	endTime: String,    
+	miles: Number,
+	notes: String
 });
 
 

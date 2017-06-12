@@ -10,7 +10,7 @@
         <div class="exercise" ng-repeat="run in exercise">
             <div class="alert alert-warning alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="deleteExercise(run._id)"><span aria-hidden="true">&times;</span></button>
-                <p>{{ run.length }} miles at {{ run.time }}</p>
+                <p>{{ run.miles }} miles at {{ run.time }}</p>
             </div>
 
         </div>
@@ -26,10 +26,11 @@
                 <p>Smoked a cigarette at {{ smoke.time }}</p>
             </div>
         </div>
-        <div class="journal" ng-repeat="entry in journal">
+        <div class="journal" ng-repeat="thing in journal">
             <div class="alert alert-warning alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="deleteJournal(entry._id)"><span aria-hidden="true">&times;</span></button>
-                <p>Wrote journal entry at {{ entry.time }}</p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="deleteJournal(thing._id)"><span aria-hidden="true">&times;</span></button>
+                <p>Wrote journal entry at {{ thing.time }} {{ thing.entry }}</p>
+                
             </div>
         </div>
 	</div>

@@ -1,29 +1,110 @@
-    <!-- tasks -->
-    <div id="tasks" class="row">
-      <div class="task col-md-4 col-sm-6">
-        <div class="entry" style="background: #AABBAA;">
-          <a href="/addHydrate"><h1><i class="fa fa-tint fa-5x"></i></h1></a>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Focus</h3>
+  </div>
+  <div class="panel-body">
+    <div ng-if="myFocus[myFocus.length-1] == undefined || myFocus[myFocus.length -1].active == false"class="row" style="text-align:center;">
+      <form class="form-inline">
+        <label class="mr-sm-2" for="inlineFormCustomSelect">What is your focus on?</label>
+        <div class="form-group">
+          <textarea class="form-control" id="exampleTextarea" rows="1" ng-model="formData.theFocus"></textarea>
         </div>
-      </div>
-      <div class="task col-md-4 col-sm-6">
-        <div class="entry" style="background: #FF8888;">
-          <a href="/addFood" ><h1><i class="fa fa-cutlery fa-5x"></i></h1></a>
-        </div>
-      </div>
-      <div class="task col-md-4 col-sm-6">
-        <div class="entry" style="background: #8888DD;">
-            <a href="/addCig"><h1><i class="fa fa-cloud fa-5x"></i></h1></a>
-        </div>
-      </div>
-      <div class="task col-md-4 col-sm-6 col-md-offset-2">
-        <div class="entry" style="background: #FFAAFF;">
-          <a href="/addJournal" ><h1><i class="fa fa-file-text-o fa-5x"></i></h1></a>
-        </div>
-      </div>
-      <div class="task col-md-4 col-sm-6">
-        <div class="entry" style="background: #66FF66;">
-          <a href="/addExercise"><h1><i class="fa fa-heartbeat fa-5x"></i></h1></a>
-        </div>
-      </div>
+        <button type="submit" class="btn btn-primary" ng-click="startFocus()">Begin</button>
+      </form>
     </div>
+    <div ng-if="myFocus[myFocus.length-1] !== undefined && myFocus[myFocus.length -1].active == true"class="row" style="text-align:center;">
+      <form class="form-inline">
+          <label class="mr-sm-2" for="inlineFormCustomSelect">Current Focus: {{ myFocus[myFocus.length-1].theFocus }}</label>
+        <div class="form-group">
+          notes: <textarea class="form-control" id="exampleTextarea" rows="1" ng-model="formData.notes"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" ng-click="stopFocus(myFocus[myFocus.length-1]._id)">Stop</button>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Journals</h3>
+  </div>
+  <div class="panel-body" style="padding-left: 10%; padding-right: 10%;">
+    <div class="row" style="text-align:center; padding-top: 50px; padding-bottom: 50px;">
+      <!-- tasks -->
+      <div id="tasks" class="row">
+        <div class="task col-md-4 col-sm-6">
+          <div class="entry" style="background: #8888DD;">
+            <a href="/addCig"><h1><i class="fa fa-cloud fa-4x"></i></h1></a>
+          </div>
+          <p class="muted" style="text-align: center;">Cigarettes&nbsp;<span class="label label-primary">{{ cig.length  }}</span></p>
+        </div>
+        <div class="task col-md-4 col-sm-6">
+          <div class="entry" style="background: #AABBAA;">
+            <a href="/addHydrate"><h1><i class="fa fa-tint fa-4x"></i></h1></a>
+          </div>
+          <p class="muted" style="text-align: center;">Hydration&nbsp;<span class="label label-primary">{{ hydrate.length }}</span></p>
+        </div>
+        <div class="task col-md-4 col-sm-6">
+          <div class="entry" style="background: #FF8888;">
+            <a href="/addFood"><h1><i class="fa fa-cutlery fa-4x"></i></h1></a>
+          </div>
+          <p class="muted" style="text-align: center;">Food&nbsp;<span class="label label-primary">{{ food.length }}</span></p>
+        </div>
 
+        <div class="task col-md-4 col-sm-6">
+          <div class="entry" style="background: #FFAAFF;">
+            <!--This is going to have to change to /startJournal -->
+            <a href="/addJournal"><h1><i class="fa fa-file-text-o fa-4x"></i></h1></a>
+          </div>
+          <p class="muted" style="text-align: center;">Diary&nbsp;<span class="label label-primary">{{ journal.length }}</span></p>
+        </div>
+        <div class="task col-md-4 col-sm-6">
+          <div class="entry" style="background: #66FF66;">
+            <a href="/addExercise"><h1><i class="fa fa-heartbeat fa-4x"></i></h1></a>
+          </div>
+          <p class="muted" style="text-align: center;">Exercise&nbsp;<span class="label label-primary">{{ exercise.length }}</span></p>
+        </div>
+        <div class="task col-md-4 col-sm-6">
+          <div class="entry" style="background: #44FFFF;">
+            <a href="/addMeditation"><h1><i class="fa fa-cube fa-4x"></i></h1></a>
+          </div>
+          <p class="muted" style="text-align: center;">Meditation&nbsp;<span class="label label-primary">{{ meditation.length }}</span></p>
+        </div>
+        <div class="task col-md-4 col-sm-6">
+          <div class="entry" style="background: #44FFFF;">
+            <a href="/addMedicalJournal">
+                <h1>
+  <i  class="fa fa-stethoscope fa-4x"></i>
+                  </h1>
+            </a>
+        </div>
+        <p class="muted" style="text-align: center;">Medical Journal&nbsp;<span class="label label-primary">{{ medical.length }}</span></p>
+        </div>
+        <div class="task col-md-4 col-sm-6">
+          <div class="entry" style="background: #FFFF00;">
+            <a href="/addUrination"><h1>
+  <i class="fa fa-plus-square fa-4x"></i>
+</h1></a>
+          </div>
+          <p class="muted" style="text-align: center;">Urination&nbsp;<span class="label label-primary">{{ urination.length }}</span></p>
+        </div>
+        <div class="task col-md-4 col-sm-6">
+          <div class="entry" style="background: #553300;">
+            <a href="/addPoop"><h1>
+  <i style="color:#fff;" class="fa fa-plus-square fa-inverse fa-4x"></i>
+</h1></a>
+          </div>
+          <p class="muted" style="text-align: center;">Poop&nbsp;<span class="label label-primary">{{ poop.length }}</span></p>
+        </div>
+        <div class="task col-md-4 col-sm-6">
+          <div class="entry" style="background: #222222;">
+            <a href="/addSleep"><h1>
+  <i style="color:#fff;" class="fa fa-power-off fa-4x fa-inverse"></i>
+</h1></a>
+          </div>
+          <p class="muted" style="text-align: center;">Sleep</p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>

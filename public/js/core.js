@@ -32,6 +32,26 @@ angular.module('serenity', ['homeDisplay', 'trackerApp', 'ngRoute'])
             templateUrl : 'addExercise.htm',
             controller: "mainController"
         })
+        .when("/addMeditation", {
+            templateUrl : 'addMeditation.htm',
+            controller: "mainController"
+        })
+        .when("/addMedicalJournal", {
+            templateUrl : 'addMedical.htm',
+            controller : "mainController"
+        })
+        .when("/addUrination", {
+            templateUrl : 'addUrination.htm',
+            controller : "mainController"
+        })
+        .when("/addPoop", {
+            templateUrl : 'addPoop.htm',
+            controller : "mainController"
+        })
+        .when("/addSleep", {
+            templateUrl : 'addSleep.htm',
+            controller : "mainController"
+        })
 		.otherwise({redirectTo: '/' });
 
         $locationProvider.html5Mode(true);
